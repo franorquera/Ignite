@@ -7,6 +7,7 @@ import styled from "styled-components";
 import {motion} from "framer-motion";
 // Components
 import Game from "../components/Game";
+import GameDetail from "../components/GameDetail";
 
 const Home = () => {
     // Fetch Games
@@ -20,9 +21,22 @@ const Home = () => {
 
     return (
         <GameList>
+            <GameDetail />
             <h2>Upcoming Games</h2>
             <Games>
                 {upcoming.map(game => (
+                    <Game name={game.name} released={game.released} id={game.id} image={game.background_image} key={game.id}/>
+                ))}
+            </Games>
+            <h2>Popular Games</h2>
+            <Games>
+                {popular.map(game => (
+                    <Game name={game.name} released={game.released} id={game.id} image={game.background_image} key={game.id}/>
+                ))}
+            </Games>
+            <h2>New Games Games</h2>
+            <Games>
+                {newGames.map(game => (
                     <Game name={game.name} released={game.released} id={game.id} image={game.background_image} key={game.id}/>
                 ))}
             </Games>
