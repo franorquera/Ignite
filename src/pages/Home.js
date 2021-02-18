@@ -9,6 +9,8 @@ import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
 // Components
 import Game from "../components/Game";
 import GameDetail from "../components/GameDetail";
+// Animation
+import { fadeIn } from "../animations";
 
 const Home = () => {
     // Get de URL location
@@ -25,9 +27,19 @@ const Home = () => {
     const { popular, newGames, upcoming, searched } = useSelector(state => state.games);
 
     return (
-        <GameList>
+        <GameList variants={fadeIn} initial="hidden" animate="show">
             <AnimateSharedLayout type='crossfade'>
                 <AnimatePresence> {pathID && <GameDetail pathId={pathID} />} </AnimatePresence>
+                {searched.length ? (
+                    <div className="searched">
+                        <h2>Searched Games</h2>
+                        <Games>
+                            {searched.map(game => (
+                                <Game name={game.name} released={game.released} id={game.id} image={game.background_image} key={game.id} />
+                            ))}
+                        </Games>
+                    </div>
+                ) : ""}
                 <h2>Upcoming Games</h2>
                 <Games>
                     {upcoming.map(game => (

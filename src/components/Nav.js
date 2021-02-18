@@ -7,7 +7,7 @@ import logo from "../img/logo.svg";
 //Redux and Routes
 import { fetchSearch } from "../actions/gamesAction";
 import { useDispatch } from "react-redux";
-//import { fadeIn } from "../animations";
+import { fadeIn } from "../animations";
 
 const Nav = () => {
     const [textInput, setTextInput] = useState('');
@@ -23,9 +23,13 @@ const Nav = () => {
         setTextInput("")
     }
 
+    const clearSeachedGames = () => {
+        dispatch({ type: "CLEAR_SEACHED_GAMES" });
+    }
+
     return (
-        <StyledNav>
-            <Logo>
+        <StyledNav variants={fadeIn} initial="hidden" animate="show">
+            <Logo onClick={clearSeachedGames}>
                 <img src={logo} alt="logo" />
                 <h1>Ignite</h1>
             </Logo>
